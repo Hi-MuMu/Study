@@ -43,6 +43,7 @@ int main(){
 - t1과 t2는 같은 namespace에 존재
 - 헤더파일을 쓸 때 유용함.
 - 헤더파일을 하는건 그냥 main.h의 전체 내용을 복사해서 위에 붙여놓는 것과 같은 동작을 한다.
+- 선언부와 정의부를 분할하여 구현한다.
 
 ```C++
 //main.h
@@ -76,3 +77,25 @@ namespace Name {
 }
 ```
 
+### Unnamed Namespace
+- 외부 파일에서 접근 못하는 변수와 함수를 만들 때, static 키워드 대신 Unnamed Namespace사용이 권장된다.
+```C++
+static int x; // C언어 기준 이 파일 내에서만 사용하는 전역 변수
+static void run() {
+
+} // C언어 기준 파일 내에서만 사용하는 전역 함수
+
+namepsace { // C++스타일임 autosar 기준 둘 다 사용해라.
+    int x;
+    void run(){
+
+    }
+}
+
+```
+
+### [정리] namespace
+- 다양한 C++ Library들은 다른 Library 들과 이름충돌이 발생하지 않도록 namespace 문법을 사용해서 제작되곤 한다.
+- 모든 C++ 표준 Library들은 std::를 사용한다.
+- using namespace std (using-directive)를 사용하지 말자. 이름 충돌 발생 가능성을 없애야 한다.
+- 중첩 namespace로 인해 코드가 길어질때는 namespace alias 또는 using-declaratio을 사용하여 축약할 수 있다.
